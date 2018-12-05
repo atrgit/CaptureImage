@@ -160,8 +160,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(NetworkResponse response) {
                         try {
-                            JSONObject obj = new JSONObject(new String(response.data));
-                            Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            JSONObject json = new JSONObject(new String(response.data));
+                            int    code = json.getInt("code");
+                            String msg  = json.getString("msg");
+                            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
